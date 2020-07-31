@@ -1,5 +1,5 @@
-import com.clevisson.blog.Article
-import com.clevisson.blog.User
+package com.clevisson.blog
+
 import org.springframework.data.repository.CrudRepository
 
 interface ArticleRepository : CrudRepository<Article, Long>{

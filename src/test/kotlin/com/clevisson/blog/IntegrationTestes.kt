@@ -22,12 +22,16 @@ class IntegrationTestes(@Autowired val resTemplate: TestRestTemplate) {
         println(">> Assert blog page title, content and status code")
         val entity = resTemplate.getForEntity<String>("/")
         assertThat(entity.statusCode).isEqualTo(HttpStatus.OK)
-        assertThat(entity.body).contains("<h1>Blog</h1>")
+        assertThat(entity.body).contains("<h1>Blog</h1>", "Reactor")
     }
 
     @Test
     fun `Assert article page title, content and status code`() {
-        println(">> TODO")
+        println(">> Assert article page title, content and status code")
+        val title ="Koltin é uma liguagem de programação feita pela Jetbrains"
+        val entity = resTemplate.getForEntity<String>("/article/${title.toSlug()}")
+        assertThat(entity.statusCode).isEqualTo(HttpStatus.OK)
+        assertThat(entity.body).contains(title, "O kotlin roda na JVM, tem segurança para nulo e é possui interoperabilidade com o Java")
     }
 
     @AfterAll
